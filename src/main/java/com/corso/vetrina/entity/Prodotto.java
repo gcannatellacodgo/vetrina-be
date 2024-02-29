@@ -1,13 +1,12 @@
 package com.corso.vetrina.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name="Prodotto")
 public class Prodotto {
 
-    @Column(name = "blobImg", nullable = false, columnDefinition = "BINARY(256)", length = 256)
+    @Lob
     private byte[] blobImg;
     private String titolo;
     @Id

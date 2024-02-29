@@ -2,8 +2,10 @@ package com.corso.vetrina.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="User")
 public class User {
     private String nome;
     private String cognome;
