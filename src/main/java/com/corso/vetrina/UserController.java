@@ -7,22 +7,28 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("UserLog-in")
+@RequestMapping("/userLogin")
 public class UserController {
     @Autowired
     private UserService utenti;
 
-    @PostMapping ("InserisciUtente")
-    public ResponseEntity<User> inserisciUtente (@RequestBody User utente){
-        return utenti.aggiungiUtente(utente);
+    @PostMapping ("/registrazione")
+    public ResponseEntity<User> registrazione (@RequestBody User utente){
+        return utenti.registrazione(utente);
     }
 
 
 
-    @GetMapping ("visualizzaUtente")
-    public ResponseEntity<User> visualizzaUtente (HttpServletRequest request){
+    @GetMapping ("/login")
+
+    public ResponseEntity<User> login(@RequestHeader("Authorization") String auth) {
+        return utenti.login(auth);
+    }
+
+
+   /* public ResponseEntity<User> visualizzaUtente (HttpServletRequest request){
         request.getHeader("auth");
-        return utenti.visualizzaUtente();}
+        return utenti.visualizzaUtente("");}*/
 
 
 
