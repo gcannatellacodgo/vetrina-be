@@ -27,14 +27,15 @@ public class VetrinaService {
 
     }
 
-    public ResponseEntity<List<ProdottoDto>> visualizzaProdotti(){
-        List<Prodotto> listaProdotti=prodotti.findAll();
+    public ResponseEntity<List<ProdottoDto>> visualizzaProdotti(String testo) {
+        List<Prodotto> listaProdotti = prodotti.findAll();
+        List<ProdottoDto> prodottiDTO = new ArrayList<>();
 
-        if(listaProdotti.size()==0){
-            return ResponseEntity.status(200).header("message","Non ci sono prodotti").body(null);
-        } else {
+        if (listaProdotti.size() == 0) {
+            return ResponseEntity.status(200).header("message", "Non ci sono prodotti").body(null);
+        } else if (testo == null) {
 
-            List<ProdottoDto> prodottiDTO = new ArrayList<>();
+
 
             listaProdotti.forEach(item -> {
                 ProdottoDto dto = new ProdottoDto();
@@ -44,6 +45,19 @@ public class VetrinaService {
                 dto.setPrezzo(item.getPrezzo());
                 prodottiDTO.add(dto);
             });
+            return ResponseEntity.ok().body(prodottiDTO);
+        } else {
+
+           List<Prodotto> listaFiltrata= prodotti.findAllByModelloContainingIgnoreCaseOrTitoloContainingIgnoreCase(testo,testo);
+            listaFiltrata.forEach(item -> {
+                ProdottoDto dto = new ProdottoDto();
+                dto.setBlobImg(item.getBlobImg());
+                dto.setModello(item.getModello());
+                dto.setDescrizione(item.getDescrizione());
+                dto.setPrezzo(item.getPrezzo());
+                prodottiDTO.add(dto);
+            });
+
             return ResponseEntity.ok().body(prodottiDTO);
         }
     }
