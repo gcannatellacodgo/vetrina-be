@@ -20,7 +20,6 @@ public class UserController {
 
 
     @GetMapping ("/login")
-
     public ResponseEntity<User> login(@RequestHeader("Authorization") String auth) {
         return utenti.login(auth);
     }

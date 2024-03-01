@@ -64,7 +64,7 @@ public class UserService {
 
             if (optionalUser.isPresent() && password.equals(optionalUser.get().getPassword()) ) {
 
-                    return ResponseEntity.status(200).header("message", "Credenziali corrette").body(null);
+                    return ResponseEntity.status(200).header("message", "Credenziali corrette").body(optionalUser.get());
                 }
             else     {
                     return ResponseEntity.status(200).header("message", "Credenziali non presenti, registrati").body(null);
