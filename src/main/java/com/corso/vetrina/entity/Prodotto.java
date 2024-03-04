@@ -2,6 +2,9 @@ package com.corso.vetrina.entity;
 
 import jakarta.persistence.*;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 @Entity
 @Table(name="prodotto")
 public class Prodotto {
@@ -55,6 +58,9 @@ public class Prodotto {
     }
 
     public double getPrezzo() {
+        NumberFormat formatter = new DecimalFormat("#0.00");
+
+        prezzo = Double.parseDouble(formatter.format(prezzo));
         return prezzo;
     }
 
