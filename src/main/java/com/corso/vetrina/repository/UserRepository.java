@@ -1,4 +1,4 @@
-package com.corso.vetrina;
+package com.corso.vetrina.repository;
 
 import com.corso.vetrina.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

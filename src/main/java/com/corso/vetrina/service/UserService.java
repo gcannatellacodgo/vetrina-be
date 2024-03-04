@@ -1,10 +1,9 @@
-package com.corso.vetrina;
+package com.corso.vetrina.service;
 
+import com.corso.vetrina.repository.UserRepository;
 import com.corso.vetrina.entity.User;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -32,13 +31,6 @@ public class UserService {
         if (optionalUser.isPresent()){
             return ResponseEntity.status(200).header ("message", "mail presente").body(null);
         }else {
-            User contatto = new User();
-            contatto.setNome(utente.getNome());
-            contatto.setMail(utente.getMail());
-            contatto.setCellulare(utente.getCellulare());
-            contatto.setCognome(utente.getCognome());
-
-
             return ResponseEntity.ok(utenti.save(utente));
         }
     }

@@ -1,6 +1,6 @@
-package com.corso.vetrina;
+package com.corso.vetrina.service;
 
-import com.corso.vetrina.Dto.ProdottoDto;
+import com.corso.vetrina.dto.ProdottoDto;
 import com.corso.vetrina.entity.Prodotto;
 import com.corso.vetrina.repository.ProdottiRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,7 @@ package com.corso.vetrina.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Prodotto")
+@Table(name="prodotto")
 public class Prodotto {
 
     @Lob

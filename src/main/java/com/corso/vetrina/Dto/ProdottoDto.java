@@ -1,4 +1,4 @@
-package com.corso.vetrina.Dto;
+package com.corso.vetrina.dto;
 
 
 

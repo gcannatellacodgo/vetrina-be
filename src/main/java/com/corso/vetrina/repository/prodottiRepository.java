@@ -1,6 +1,5 @@
 package com.corso.vetrina.repository;
 
-import com.corso.vetrina.Dto.ProdottoDto;
 import com.corso.vetrina.entity.Prodotto;
 import org.springframework.data.jpa.repository.JpaRepository;
 

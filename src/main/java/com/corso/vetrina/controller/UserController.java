@@ -1,13 +1,13 @@
-package com.corso.vetrina;
+package com.corso.vetrina.controller;
 
 import com.corso.vetrina.entity.User;
-import jakarta.servlet.http.HttpServletRequest;
+import com.corso.vetrina.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/userLogin")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService utenti;
@@ -19,7 +19,7 @@ public class UserController {
 
 
 
-    @GetMapping ("/login")
+    @GetMapping()
     public ResponseEntity<User> login(@RequestHeader("Authorization") String auth) {
         return utenti.login(auth);
     }
