@@ -5,7 +5,9 @@ import com.corso.vetrina.entity.Prodotto;
 import com.corso.vetrina.repository.ProdottiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,4 +64,18 @@ public class VetrinaService {
         }
     }
 
+    public ResponseEntity<Prodotto> aggiungiModificaProdotto(Prodotto prodotto){
+        Optional<Prodotto> optionalProdotto = prodotti.findByModello(prodotto.getModello());
+        if (optionalProdotto.isPresent()){
+            return ResponseEntity.status(200).header("message", "modello aggiornato").body(prodotti.save(prodotto));
+        }else {
+            return ResponseEntity.status(200).header("message", "modello aggiunto").body(prodotti.save(prodotto));
+        }
+    }
+
+
+    public ResponseEntity<Prodotto> eliminaProdotto(String modello){
+        prodotti.deleteById(modello);
+        return ResponseEntity.status(200).header("message","modello eliminato").body(null);
+    }
 }

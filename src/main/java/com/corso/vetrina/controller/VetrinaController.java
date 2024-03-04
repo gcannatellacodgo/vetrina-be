@@ -25,6 +25,18 @@ public class VetrinaController {
         return vetrina.visualizzaProdotti(ricerca);
     }
 
+    @PostMapping("/inserisci")
+    public ResponseEntity<Prodotto> inserisciProdotto(@RequestBody Prodotto prodotto){
+        return vetrina.aggiungiModificaProdotto(prodotto);
+    }
+    @PutMapping("/modifica")
+    public ResponseEntity<Prodotto> modificaProdotto(@RequestBody Prodotto prodotto){
+        return vetrina.aggiungiModificaProdotto(prodotto);
+    }
 
+    @DeleteMapping("/elimina/{modello}")
+    public ResponseEntity<Prodotto> eliminaProdotto(@PathVariable String modello){
+        return vetrina.eliminaProdotto(modello);
+    }
 
 }
