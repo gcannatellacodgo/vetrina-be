@@ -1,9 +1,13 @@
 package com.corso.vetrina.dto;
 
+import com.corso.vetrina.entity.ImageEntity;
 
+import java.util.List;
 
 public class ProdottoDto {
-    private byte[] blobImg;
+
+
+    private List<ImageEntity> blobImg;
     private String modello;
     private String descrizione;
     private double prezzo;
@@ -12,14 +16,13 @@ public class ProdottoDto {
 
     }
 
-    public byte[] getBlobImg() {
+    public List<ImageEntity> getBlobImg() {
         return blobImg;
     }
 
-    public void setBlobImg(byte[] blobImg) {
+    public void setBlobImg(List<ImageEntity> blobImg) {
         this.blobImg = blobImg;
     }
-
     public String getModello() {
         return modello;
     }

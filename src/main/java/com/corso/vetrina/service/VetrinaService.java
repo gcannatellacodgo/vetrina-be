@@ -1,6 +1,7 @@
 package com.corso.vetrina.service;
 
 import com.corso.vetrina.dto.ProdottoDto;
+import com.corso.vetrina.entity.ImageEntity;
 import com.corso.vetrina.entity.Prodotto;
 import com.corso.vetrina.repository.ProdottiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,6 @@ public class VetrinaService {
             return ResponseEntity.status(200).header("message", "Non ci sono prodotti").body(null);
         } else if (testo == null) {
 
-
-
             listaProdotti.forEach(item -> {
                 ProdottoDto dto = new ProdottoDto();
                 dto.setBlobImg(item.getBlobImg());
@@ -67,7 +66,18 @@ public class VetrinaService {
     public ResponseEntity<Prodotto> aggiungiModificaProdotto(Prodotto prodotto){
         Optional<Prodotto> optionalProdotto = prodotti.findByModello(prodotto.getModello());
         if (optionalProdotto.isPresent()){
-            return ResponseEntity.status(200).header("message", "modello aggiornato").body(prodotti.save(prodotto));
+            Prodotto tmpProdotto = optionalProdotto.get();
+            tmpProdotto.setModello(optionalProdotto.get().getModello());
+            tmpProdotto.setDescrizione(optionalProdotto.get().getDescrizione());
+            tmpProdotto.setPrezzo(optionalProdotto.get().getPrezzo());
+            tmpProdotto.setTitolo(optionalProdotto.get().getTitolo());
+            tmpProdotto.setCodice(optionalProdotto.get().getCodice());
+
+            for (int i = 0; i < tmpProdotto.getBlobImg().size(); i++) {
+                tmpProdotto.getBlobImg().get(i).setImage(prodotto.getBlobImg().get(i).getImage());
+            }
+
+            return ResponseEntity.status(200).header("message", "modello aggiornato").body(prodotti.save(tmpProdotto));
         }else {
             return ResponseEntity.status(200).header("message", "modello aggiunto").body(prodotti.save(prodotto));
         }

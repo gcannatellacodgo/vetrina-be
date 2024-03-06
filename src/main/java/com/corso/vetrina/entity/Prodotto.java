@@ -1,16 +1,19 @@
 package com.corso.vetrina.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.metamodel.mapping.internal.ImmutableAttributeMappingList;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.List;
 
 @Entity
 @Table(name="prodotto")
 public class Prodotto {
 
-    @Lob
-    private byte[] blobImg;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ImageEntity> blobImg;
     private String titolo;
     @Id
     private String modello;
@@ -24,6 +27,14 @@ public class Prodotto {
 
     }
 
+
+    public List<ImageEntity> getBlobImg() {
+        return blobImg;
+    }
+
+    public void setBlobImg(List<ImageEntity> blobImg) {
+        this.blobImg = blobImg;
+    }
 
     public String getTitolo() {
         return titolo;
@@ -58,9 +69,7 @@ public class Prodotto {
     }
 
     public double getPrezzo() {
-        NumberFormat formatter = new DecimalFormat("#0.00");
 
-        prezzo = Double.parseDouble(formatter.format(prezzo));
         return prezzo;
     }
 
@@ -68,11 +77,5 @@ public class Prodotto {
         this.prezzo = prezzo;
     }
 
-    public byte[] getBlobImg() {
-        return blobImg;
-    }
 
-    public void setBlobImg(byte[] blobImg) {
-        this.blobImg = blobImg;
-    }
 }
